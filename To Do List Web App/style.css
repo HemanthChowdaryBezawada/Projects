@@ -1,0 +1,283 @@
+/* 1. Fix color typo and add modern palette */
+:root {
+  --gradient: linear-gradient(180deg, #2d70fd 0%, #163e92 100%);
+  --dark: #001747;
+  --grey: #b1bacb;
+  --grey-border: rgba(210, 210, 210, 0.75);
+  --grey-light: #f5f7fa;
+  --grey-dark: #405175;
+  --blue: #2d70fd;
+  --green: #00d8a7;
+  --white: #ffffff;
+  --danger: #e74c3c;
+  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --transition: 0.2s cubic-bezier(.4,2,.6,1);
+}
+
+/* 2. Modern body and font */
+body {
+  background: var(--gradient);
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  --gradient: linear-gradient(180deg, #10192b 0%, #232946 100%);
+  --dark: #f4f4f4;
+  --grey: #7b8fa1;
+  --grey-border: rgba(80, 80, 80, 0.35);
+  --grey-light: #232946;
+  --grey-dark: #e0e0e0;
+  --blue: #3f8cff;
+  --green: #00d8a7;
+  --white: #181c2f;
+  --danger: #ff6b6b;
+  --shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  background: var(--gradient);
+}
+body.dark-mode .todo-card,
+body.dark-mode .footer {
+  background: var(--white);
+  color: var(--dark);
+}
+body.dark-mode .todo-header h1,
+body.dark-mode .made-by {
+  color: var(--dark);
+}
+body.dark-mode .input-field,
+body.dark-mode .edit-input {
+  background: var(--grey-light);
+  color: var(--dark);
+  border-color: var(--grey-border);
+}
+body.dark-mode .todo-item.completed .todo-text,
+body.dark-mode .todo-text.disabled,
+body.dark-mode .empty-state {
+  color: var(--grey);
+}
+body.dark-mode .divider {
+  border-top: 1.5px solid var(--grey-border);
+}
+
+/* 3. Card container */
+.todo-card {
+  background: var(--white);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow);
+  padding: 2.5rem 2rem 2rem 2rem;
+  max-width: 420px;
+  width: 95vw;
+  margin: 2.5rem auto 1.5rem auto;
+  transition: background 0.3s;
+  position: relative;
+}
+
+/* 4. Header and theme toggle */
+.todo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.todo-header h1 {
+  font-size: 2rem;
+  color: var(--dark);
+  letter-spacing: 0.02em;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--grey-dark);
+  font-size: 1.4rem;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+.icon-btn:hover, .icon-btn:focus {
+  background: var(--grey-light);
+  color: var(--blue);
+  outline: none;
+}
+
+/* 5. Input form */
+.todo-input {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.input-field {
+  flex: 1;
+  border: 1.5px solid var(--grey-border);
+  border-radius: 0.6rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 1.08rem;
+  background: var(--grey-light);
+  transition: border 0.2s;
+}
+.input-field:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+.add-btn {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  transition: background var(--transition);
+}
+.add-btn:hover, .add-btn:focus {
+  background: var(--green);
+  outline: none;
+}
+
+/* 6. Todo list */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--grey-border);
+  font-size: 1.08rem;
+  animation: fadeIn 0.4s;
+  background: transparent;
+  transition: background 0.2s;
+}
+.todo-item:last-child {
+  border-bottom: none;
+}
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--grey);
+  opacity: 0.7;
+}
+.todo-checkbox {
+  accent-color: var(--blue);
+  width: 1.2em;
+  height: 1.2em;
+  cursor: pointer;
+}
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.todo-text.disabled {
+  color: var(--grey);
+  text-decoration: line-through;
+}
+.delete-btn {
+  color: var(--danger);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+.delete-btn:hover, .delete-btn:focus {
+  background: var(--danger);
+  color: var(--white);
+  outline: none;
+}
+.empty-state {
+  text-align: center;
+  color: var(--grey);
+  font-style: italic;
+  padding: 2rem 0;
+  font-size: 1.1rem;
+}
+
+/* 7. Edit input */
+.edit-input {
+  flex: 1;
+  font-size: 1.08rem;
+  padding: 0.4em 0.7em;
+  border-radius: 0.4rem;
+  border: 1.5px solid var(--blue);
+  background: var(--grey-light);
+  outline: none;
+}
+
+/* 8. Counter and divider */
+.divider {
+  border: none;
+  border-top: 1.5px solid var(--grey-light);
+  margin: 1.2rem 0 0.7rem 0;
+}
+.counter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--grey-dark);
+  font-size: 1rem;
+}
+.counter-container button {
+  border: none;
+  background: none;
+  color: var(--danger);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.4rem;
+  transition: background 0.2s, color 0.2s;
+}
+.counter-container button:hover, .counter-container button:focus {
+  background: var(--danger);
+  color: var(--white);
+  outline: none;
+}
+
+/* 9. Footer */
+.footer {
+  margin-top: 2rem;
+  background: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 12px 0 rgba(31, 38, 135, 0.07);
+  text-align: center;
+}
+.made-by {
+  color: var(--grey-dark);
+  font-size: 0.97rem;
+}
+.author {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* 10. Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* 11. Responsive */
+@media (max-width: 600px) {
+  .todo-card {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  .footer {
+    padding: 0.7rem 0.5rem;
+  }
+}
